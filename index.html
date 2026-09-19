@@ -1,48 +1,277 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Case Count</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tenspeed Count Message</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 2rem;
+        color: #1f2937;
+      }
+
+      nav {
+        margin-bottom: 1.5rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      th, td {
+        border: 1px solid #d1d5db;
+        padding: 0.75rem;
+        vertical-align: top;
+      }
+
+      thead th:nth-child(1),
+      tbody td:nth-child(1) {
+        width: 26%;
+      }
+
+      thead th:nth-child(2),
+      tbody td:nth-child(2) {
+        width: 52%;
+      }
+
+      thead th:nth-child(3),
+      tbody td:nth-child(3) {
+        width: 22%;
+      }
+
+      th {
+        background: #f3f4f6;
+        text-align: left;
+      }
+
+      code {
+        display: block;
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.25rem;
+        padding: 0.55rem 0.65rem;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .controls input {
+        width: 4.5rem;
+      }
+
+      .controls button {
+        cursor: pointer;
+      }
+
+      :focus-visible {
+        outline: 3px solid #1d4ed8;
+        outline-offset: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1>
-    <case-count count="1" announce>
-      <span slot="singular">One fox found.</span>
-      <span slot="plural"><span data-count></span> foxes found.</span>
-      <span slot="zero">No foxes found.</span>
-    </case-count>
-</h1>
+    <main>
+      <h1>Pluralization examples</h1>
 
-<h2>
-<case-count count="0" announce>
-      <span slot="singular">One result found.</span>
-      <span slot="plural"><span data-count></span> results found.</span>
-      <span slot="zero">No results found.</span>
-    </case-count>
-  </h2>
-    <h2>
-<case-count count="32" announce>
-      <span slot="singular">One result found.</span>
-      <span slot="plural"><span data-count></span> results found.</span>
-      <span slot="zero">No results found.</span>
-    </case-count>
-</h2>
+      <table>
+        <caption>Interactive pluralization examples</caption>
+      <thead>
+        <tr>
+          <th scope="col">Component</th>
+          <th scope="col">Markup</th>
+          <th scope="col">Controls</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <ts-count-message data-row="regular" count="3" count-format="words" flash="#ffd166">
+              <span slot="singular">One cat naps.</span>
+              <span slot="plural"><span data-count></span> cats nap.</span>
+              <span slot="zero">No cats nap.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="3" count-format="words" flash="#ffd166"&gt;
+  &lt;span slot="singular"&gt;One cat naps.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; cats nap.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No cats nap.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="regular" type="number" min="0" step="1" value="3" aria-label="Cat count" />
+              <button data-row="regular" data-action="inc" type="button" aria-label="Increase cat count">+</button>
+              <button data-row="regular" data-action="dec" type="button" aria-label="Decrease cat count">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="umlaut" count="2" announce>
+              <span slot="singular">One man waits.</span>
+              <span slot="plural"><span data-count data-count-format="words"></span> men wait.</span>
+              <span slot="zero">No men wait.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="2" announce&gt;
+  &lt;span slot="singular"&gt;One man waits.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count data-count-format="words"&gt;&lt;/span&gt; men wait.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No men wait.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="umlaut" type="number" min="0" step="1" value="2" aria-label="Man count" />
+              <button data-row="umlaut" data-action="inc" type="button" aria-label="Increase man count">+</button>
+              <button data-row="umlaut" data-action="dec" type="button" aria-label="Decrease man count">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="en" count="1" announce flash="#a7f3d0">
+              <span slot="singular">One ox stands in the yard.</span>
+              <span slot="plural"><span data-count></span> oxen stand in the yard.</span>
+              <span slot="zero">No oxen stand in the yard.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="1" announce flash="#a7f3d0"&gt;
+  &lt;span slot="singular"&gt;One ox stands in the yard.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; oxen stand in the yard.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No oxen stand in the yard.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="en" type="number" min="0" step="1" value="1" aria-label="Ox count" />
+              <button data-row="en" data-action="inc" type="button" aria-label="Increase ox count">+</button>
+              <button data-row="en" data-action="dec" type="button" aria-label="Decrease ox count">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="invariant" count="4">
+              <span slot="singular">One sheep grazes.</span>
+              <span slot="plural"><span data-count></span> sheep graze.</span>
+              <span slot="zero">No sheep graze.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="4"&gt;
+  &lt;span slot="singular"&gt;One sheep grazes.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; sheep graze.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No sheep graze.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="invariant" type="number" min="0" step="1" value="4" aria-label="Sheep count" />
+              <button data-row="invariant" data-action="inc" type="button" aria-label="Increase sheep count">+</button>
+              <button data-row="invariant" data-action="dec" type="button" aria-label="Decrease sheep count">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="foreign" count="2" count-format="words" flash>
+              <span slot="singular">One criterion matters.</span>
+              <span slot="plural"><span data-count data-count-format="digits"></span> criteria matter.</span>
+              <span slot="zero">No criteria matter.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="2" count-format="words" flash&gt;
+  &lt;span slot="singular"&gt;One criterion matters.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count data-count-format="digits"&gt;&lt;/span&gt; criteria matter.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No criteria matter.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="foreign" type="number" min="0" step="1" value="2" aria-label="Criterion count" />
+              <button data-row="foreign" data-action="inc" type="button" aria-label="Increase criterion count">+</button>
+              <button data-row="foreign" data-action="dec" type="button" aria-label="Decrease criterion count">-</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </main>
 
-    <p>
-<case-count count="14" announce>
-      <span slot="singular">One result found.</span>
-      <span slot="plural"><span data-count></span> results found.</span>
-      <span slot="zero">No results found.</span>
-    </case-count>
-</p>
+    <nav>
+      <a href="./showcase.html">Open the extended showcase page</a>
+    </nav>
 
-    <p>
-      <case-count count="14" announce>
-        <span><span data-count></span> results found.</span>
-      </case-count>
-    </p>
 
-    <script type="module" src="./case-count.js"></script>
+    <script type="module" src="./ts-count-message.js"></script>
+    <script>
+      const getTarget = (row) => document.querySelector(`ts-count-message[data-row="${row}"]`);
+
+      const updateCount = (input) => {
+        const element = getTarget(input.dataset.row);
+        const nextValue = Number.parseInt(input.value, 10);
+        if (element && !Number.isNaN(nextValue)) {
+          element.setAttribute('count', String(Math.max(0, nextValue)));
+        }
+      };
+
+      document.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-row]');
+        if (!button) {
+          return;
+        }
+
+        const element = getTarget(button.dataset.row);
+        if (!element) {
+          return;
+        }
+
+        const currentValue = Number(element.getAttribute('count') ?? 0);
+        const change = button.dataset.action === 'inc' ? 1 : -1;
+        element.setAttribute('count', String(Math.max(0, currentValue + change)));
+        button.closest('.controls').querySelector('input').value = element.getAttribute('count');
+      });
+
+      document.addEventListener('change', (event) => {
+        const input = event.target.closest('input[data-row]');
+        if (input) {
+          updateCount(input);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        const input = event.target.closest('input[data-row]');
+        if (input && event.key === 'Enter') {
+          updateCount(input);
+        }
+      });
+    </script>
   </body>
 </html>

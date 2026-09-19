@@ -1,0 +1,692 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tenspeed Count Message Showcase</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        margin: 2rem;
+        color: #1f2937;
+      }
+
+      h1 {
+        margin-bottom: 0.5rem;
+      }
+
+      nav {
+        margin-bottom: 1.5rem;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+      }
+
+      th, td {
+        border: 1px solid #d1d5db;
+        padding: 0.75rem;
+        vertical-align: top;
+      }
+
+      thead th:nth-child(1),
+      tbody td:nth-child(1) {
+        width: 26%;
+      }
+
+      thead th:nth-child(2),
+      tbody td:nth-child(2) {
+        width: 52%;
+      }
+
+      thead th:nth-child(3),
+      tbody td:nth-child(3) {
+        width: 22%;
+      }
+
+      th {
+        background: #f3f4f6;
+        text-align: left;
+      }
+
+      .category-row th {
+        background: #eef2ff;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      code {
+        display: block;
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.25rem;
+        padding: 0.55rem 0.65rem;
+        min-height: 4.5rem;
+      }
+
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .controls input {
+        width: 4.5rem;
+      }
+
+      .controls button {
+        cursor: pointer;
+      }
+
+      :focus-visible {
+        outline: 3px solid #1d4ed8;
+        outline-offset: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="./index.html">Back to demo</a>
+    </nav>
+
+    <main>
+      <h1>Pluralization showcase</h1>
+
+      <table>
+        <caption>Interactive pluralization examples by category</caption>
+      <thead>
+        <tr>
+          <th scope="col">Component</th>
+          <th scope="col">Markup</th>
+          <th scope="col">Controls</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="category-row">
+          <th scope="rowgroup" colspan="3">Regular plural</th>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="regular-1" count="3" count-format="words" flash="#ffd166">
+              <span slot="singular">One cat naps.</span>
+              <span slot="plural"><span data-count></span> cats nap.</span>
+              <span slot="zero">No cats nap.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="3" count-format="words" flash="#ffd166"&gt;
+  &lt;span slot="singular"&gt;One cat naps.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; cats nap.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No cats nap.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="regular-1" type="number" min="0" step="1" value="3" />
+              <button data-row="regular-1" data-action="inc" type="button">+</button>
+              <button data-row="regular-1" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="regular-2" count="2">
+              <span slot="singular">One dog barks.</span>
+              <span slot="plural"><span data-count data-count-format="words"></span> dogs bark.</span>
+              <span slot="zero">No dogs bark.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="1"&gt;
+  &lt;span slot="singular"&gt;One dog barks.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count data-count-format="words"&gt;&lt;/span&gt; dogs bark.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No dogs bark.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="regular-2" type="number" min="0" step="1" value="2" />
+              <button data-row="regular-2" data-action="inc" type="button">+</button>
+              <button data-row="regular-2" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="regular-3" count="7" announce>
+              <span slot="singular">One fox watches.</span>
+              <span slot="plural"><span data-count></span> foxes watch.</span>
+              <span slot="zero">No foxes watch.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="7" announce&gt;
+  &lt;span slot="singular"&gt;One fox watches.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; foxes watch.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No foxes watch.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="regular-3" type="number" min="0" step="1" value="7" />
+              <button data-row="regular-3" data-action="inc" type="button">+</button>
+              <button data-row="regular-3" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="regular-4" count="4" flash="#9ae6b4">
+              <span slot="singular">One box sits.</span>
+              <span slot="plural"><span data-count></span> boxes sit.</span>
+              <span slot="zero">No boxes sit.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="4" flash="#9ae6b4"&gt;
+  &lt;span slot="singular"&gt;One box sits.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; boxes sit.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No boxes sit.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="regular-4" type="number" min="0" step="1" value="4" />
+              <button data-row="regular-4" data-action="inc" type="button">+</button>
+              <button data-row="regular-4" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="category-row">
+          <th scope="rowgroup" colspan="3">Umlaut plurals</th>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="umlaut-1" count="2" announce>
+              <span slot="singular">One man waits.</span>
+              <span slot="plural"><span data-count></span> men wait.</span>
+              <span slot="zero">No men wait.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="2" announce&gt;
+  &lt;span slot="singular"&gt;One man waits.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; men wait.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No men wait.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="umlaut-1" type="number" min="0" step="1" value="2" />
+              <button data-row="umlaut-1" data-action="inc" type="button">+</button>
+              <button data-row="umlaut-1" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="umlaut-2" count="5" flash="#7bdff2">
+              <span slot="singular">One woman smiles.</span>
+              <span slot="plural"><span data-count></span> women smile.</span>
+              <span slot="zero">No women smile.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="5" flash="#7bdff2"&gt;
+  &lt;span slot="singular"&gt;One woman smiles.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; women smile.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No women smile.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="umlaut-2" type="number" min="0" step="1" value="5" />
+              <button data-row="umlaut-2" data-action="inc" type="button">+</button>
+              <button data-row="umlaut-2" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="umlaut-3" count="3">
+              <span slot="singular">One foot steps.</span>
+              <span slot="plural"><span data-count></span> feet step.</span>
+              <span slot="zero">No feet step.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="3"&gt;
+  &lt;span slot="singular"&gt;One foot steps.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; feet step.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No feet step.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="umlaut-3" type="number" min="0" step="1" value="3" />
+              <button data-row="umlaut-3" data-action="inc" type="button">+</button>
+              <button data-row="umlaut-3" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="umlaut-4" count="4" announce flash="#fcd34d">
+              <span slot="singular">One tooth aches.</span>
+              <span slot="plural"><span data-count></span> teeth ache.</span>
+              <span slot="zero">No teeth ache.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="4" announce flash="#fcd34d"&gt;
+  &lt;span slot="singular"&gt;One tooth aches.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; teeth ache.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No teeth ache.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="umlaut-4" type="number" min="0" step="1" value="4" />
+              <button data-row="umlaut-4" data-action="inc" type="button">+</button>
+              <button data-row="umlaut-4" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="category-row">
+          <th scope="rowgroup" colspan="3">-en plurals</th>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="en-1" count="1" announce flash="#a7f3d0">
+              <span slot="singular">One ox stands in the yard.</span>
+              <span slot="plural"><span data-count></span> oxen stand in the yard.</span>
+              <span slot="zero">No oxen stand in the yard.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="1" announce flash="#a7f3d0"&gt;
+  &lt;span slot="singular"&gt;One ox stands in the yard.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; oxen stand in the yard.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No oxen stand in the yard.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="en-1" type="number" min="0" step="1" value="1" />
+              <button data-row="en-1" data-action="inc" type="button">+</button>
+              <button data-row="en-1" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="en-2" count="3" announce>
+              <span slot="singular">One child waits.</span>
+              <span slot="plural"><span data-count></span> children wait.</span>
+              <span slot="zero">No children wait.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="3" announce&gt;
+  &lt;span slot="singular"&gt;One child waits.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; children wait.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No children wait.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="en-2" type="number" min="0" step="1" value="3" />
+              <button data-row="en-2" data-action="inc" type="button">+</button>
+              <button data-row="en-2" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="en-3" count="2" flash>
+              <span slot="singular">One brother smiles.</span>
+              <span slot="plural"><span data-count></span> brethren smile.</span>
+              <span slot="zero">No brethren smile.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="2" flash&gt;
+  &lt;span slot="singular"&gt;One brother smiles.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; brethren smile.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No brethren smile.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="en-3" type="number" min="0" step="1" value="2" />
+              <button data-row="en-3" data-action="inc" type="button">+</button>
+              <button data-row="en-3" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="en-4" count="6" flash="#fca5a5">
+              <span slot="singular">One ox plods.</span>
+              <span slot="plural"><span data-count></span> oxen plod.</span>
+              <span slot="zero">No oxen plod.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="6" flash="#fca5a5"&gt;
+  &lt;span slot="singular"&gt;One ox plods.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; oxen plod.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No oxen plod.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="en-4" type="number" min="0" step="1" value="6" />
+              <button data-row="en-4" data-action="inc" type="button">+</button>
+              <button data-row="en-4" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="category-row">
+          <th scope="rowgroup" colspan="3">No change in form</th>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="invariant-1" count="4">
+              <span slot="singular">One sheep grazes.</span>
+              <span slot="plural"><span data-count></span> sheep graze.</span>
+              <span slot="zero">No sheep graze.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="4"&gt;
+  &lt;span slot="singular"&gt;One sheep grazes.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; sheep graze.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No sheep graze.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="invariant-1" type="number" min="0" step="1" value="4" />
+              <button data-row="invariant-1" data-action="inc" type="button">+</button>
+              <button data-row="invariant-1" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="invariant-2" count="2" flash>
+              <span slot="singular">One deer stands.</span>
+              <span slot="plural"><span data-count></span> deer stand.</span>
+              <span slot="zero">No deer stand.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="2" flash&gt;
+  &lt;span slot="singular"&gt;One deer stands.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; deer stand.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No deer stand.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="invariant-2" type="number" min="0" step="1" value="2" />
+              <button data-row="invariant-2" data-action="inc" type="button">+</button>
+              <button data-row="invariant-2" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="invariant-3" count="6" announce>
+              <span slot="singular">One fish glides.</span>
+              <span slot="plural"><span data-count></span> fish glide.</span>
+              <span slot="zero">No fish glide.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="6" announce&gt;
+  &lt;span slot="singular"&gt;One fish glides.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; fish glide.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No fish glide.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="invariant-3" type="number" min="0" step="1" value="6" />
+              <button data-row="invariant-3" data-action="inc" type="button">+</button>
+              <button data-row="invariant-3" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="invariant-4" count="1" flash="#c4b5fd">
+              <span slot="singular">One moose stands.</span>
+              <span slot="plural"><span data-count></span> moose stand.</span>
+              <span slot="zero">No moose stand.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="1" flash="#c4b5fd"&gt;
+  &lt;span slot="singular"&gt;One moose stands.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; moose stand.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No moose stand.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="invariant-4" type="number" min="0" step="1" value="1" />
+              <button data-row="invariant-4" data-action="inc" type="button">+</button>
+              <button data-row="invariant-4" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr class="category-row">
+          <th scope="rowgroup" colspan="3">Foreign plurals</th>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="foreign-1" count="2" count-format="words" flash>
+              <span slot="singular">One criterion matters.</span>
+              <span slot="plural"><span data-count data-count-format="digits"></span> criteria matter.</span>
+              <span slot="zero">No criteria matter.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="2" count-format="words" flash&gt;
+  &lt;span slot="singular"&gt;One criterion matters.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count data-count-format="digits"&gt;&lt;/span&gt; criteria matter.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No criteria matter.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="foreign-1" type="number" min="0" step="1" value="2" />
+              <button data-row="foreign-1" data-action="inc" type="button">+</button>
+              <button data-row="foreign-1" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="foreign-2" count="1" announce>
+              <span slot="singular">One datum appears.</span>
+              <span slot="plural"><span data-count></span> data appear.</span>
+              <span slot="zero">No data appear.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="1" announce&gt;
+  &lt;span slot="singular"&gt;One datum appears.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; data appear.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No data appear.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="foreign-2" type="number" min="0" step="1" value="1" />
+              <button data-row="foreign-2" data-action="inc" type="button">+</button>
+              <button data-row="foreign-2" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="foreign-3" count="5" flash="#f9a8d4">
+              <span slot="singular">One alumnus returns.</span>
+              <span slot="plural"><span data-count></span> alumni return.</span>
+              <span slot="zero">No alumni return.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="5" flash="#f9a8d4"&gt;
+  &lt;span slot="singular"&gt;One alumnus returns.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; alumni return.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No alumni return.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="foreign-3" type="number" min="0" step="1" value="5" />
+              <button data-row="foreign-3" data-action="inc" type="button">+</button>
+              <button data-row="foreign-3" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <ts-count-message data-row="foreign-4" count="3">
+              <span slot="singular">One analysis is ready.</span>
+              <span slot="plural"><span data-count></span> analyses are ready.</span>
+              <span slot="zero">No analyses are ready.</span>
+            </ts-count-message>
+          </td>
+          <td>
+            <code>&lt;ts-count-message count="3"&gt;
+  &lt;span slot="singular"&gt;One analysis is ready.&lt;/span&gt;
+  &lt;span slot="plural"&gt;&lt;span data-count&gt;&lt;/span&gt; analyses are ready.&lt;/span&gt;
+  &lt;span slot="zero"&gt;No analyses are ready.&lt;/span&gt;
+&lt;/ts-count-message&gt;</code>
+          </td>
+          <td>
+            <div class="controls">
+              <input data-row="foreign-4" type="number" min="0" step="1" value="3" />
+              <button data-row="foreign-4" data-action="inc" type="button">+</button>
+              <button data-row="foreign-4" data-action="dec" type="button">-</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </main>
+
+    <script type="module" src="./ts-count-message.js"></script>
+    <script>
+      const getTarget = (row) => document.querySelector(`ts-count-message[data-row="${row}"]`);
+
+      const getExampleLabel = (row) => {
+        const singularText = getTarget(row)?.querySelector('[slot="singular"]')?.textContent.trim();
+        return singularText ? `Count for ${singularText}` : `Count for ${row} example`;
+      };
+
+      document.querySelectorAll('input[data-row]').forEach((input) => {
+        input.setAttribute('aria-label', getExampleLabel(input.dataset.row));
+      });
+
+      document.querySelectorAll('button[data-row]').forEach((button) => {
+        const action = button.dataset.action === 'inc' ? 'Increase' : 'Decrease';
+        button.setAttribute('aria-label', `${action} ${getExampleLabel(button.dataset.row)}`);
+      });
+
+      document.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-row]');
+        if (!button) {
+          return;
+        }
+
+        const row = button.dataset.row;
+        const element = getTarget(row);
+        if (!element) {
+          return;
+        }
+
+        const currentValue = Number(element.getAttribute('count') ?? 0);
+        const action = button.dataset.action;
+
+        if (action === 'inc') {
+          element.setAttribute('count', String(Math.max(0, currentValue + 1)));
+        }
+
+        if (action === 'dec') {
+          element.setAttribute('count', String(Math.max(0, currentValue - 1)));
+        }
+
+        button.closest('.controls').querySelector('input').value = element.getAttribute('count');
+      });
+
+      document.addEventListener('change', (event) => {
+        const input = event.target.closest('input[data-row]');
+        if (!input) {
+          return;
+        }
+
+        const row = input.dataset.row;
+        const element = getTarget(row);
+        if (!element) {
+          return;
+        }
+
+        const nextValue = Number.parseInt(input.value, 10);
+        if (!Number.isNaN(nextValue)) {
+          element.setAttribute('count', String(Math.max(0, nextValue)));
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        const input = event.target.closest('input[data-row]');
+        if (!input || event.key !== 'Enter') {
+          return;
+        }
+
+        const row = input.dataset.row;
+        const element = getTarget(row);
+        if (!element) {
+          return;
+        }
+
+        const nextValue = Number.parseInt(input.value, 10);
+        if (!Number.isNaN(nextValue)) {
+          element.setAttribute('count', String(Math.max(0, nextValue)));
+        }
+      });
+    </script>
+
+    <p style="margin-top: 2rem;">
+      Reference: <a href="https://grammardefinition.com/whats-the-plural-of-ox-ox-oxes-oxen/" target="_blank" rel="noreferrer">Ox, Oxen, or Oxes: Mastering the Plural of Ox</a>
+    </p>
+  </body>
+</html>
