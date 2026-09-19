@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Case Count</title>
+  </head>
+  <body>
+    <h1>
+    <case-count count="1" announce>
+      <span slot="singular">One fox found.</span>
+      <span slot="plural"><span data-count></span> foxes found.</span>
+      <span slot="zero">No foxes found.</span>
+    </case-count>
+</h1>
+
+<h2>
+<case-count count="0" announce>
+      <span slot="singular">One result found.</span>
+      <span slot="plural"><span data-count></span> results found.</span>
+      <span slot="zero">No results found.</span>
+    </case-count>
+  </h2>
+    <h2>
+<case-count count="32" announce>
+      <span slot="singular">One result found.</span>
+      <span slot="plural"><span data-count></span> results found.</span>
+      <span slot="zero">No results found.</span>
+    </case-count>
+</h2>
+
+    <p>
+<case-count count="14" announce>
+      <span slot="singular">One result found.</span>
+      <span slot="plural"><span data-count></span> results found.</span>
+      <span slot="zero">No results found.</span>
+    </case-count>
+</p>
+
+    <p>
+      <case-count count="14" announce>
+        <span><span data-count></span> results found.</span>
+      </case-count>
+    </p>
+
+    <script type="module" src="./case-count.js"></script>
+  </body>
+</html>
